@@ -77,6 +77,7 @@ LV_IMG_DECLARE(ui_img_pcmontior_png);      // assets/pcmontior.png
 LV_IMG_DECLARE(ui_img_dino_png);           // App 01 Dino Game
 LV_IMG_DECLARE(ui_img_matrix_rain_png);    // App 02 Matrix Rain
 LV_IMG_DECLARE(ui_img_vu_meter_png);       // App 03 VU Meter
+LV_IMG_DECLARE(ui_img_temp_sensor_png);    // App 10 Temp/Humidity
 LV_IMG_DECLARE(ui_img_retro_tv_png);       // App 04 Retro TV
 LV_IMG_DECLARE(ui_img_pc_montior_png);     // App 05 PC Monitor (alt spelling)
 LV_IMG_DECLARE(ui_img_air_mouse_png);      // App 06 Air Mouse

@@ -25,6 +25,7 @@ HIDDIR="$(find "${HOME}/.platformio/packages" -name HIDTypes.h 2>/dev/null | hea
 # test name                 extra per-test flags
 TESTS=(
   "pc_monitor_protocol"     ""
+  "sht30_convert"           ""
   "infrared_file_utils"     ""
   "air_mouse_motion"        ""
   "air_mouse_hid"           ""
