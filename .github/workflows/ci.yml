@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Cache PlatformIO
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.platformio
+            ~/.cache/pip
+          key: pio-${{ runner.os }}-${{ hashFiles('platformio.ini') }}
+          restore-keys: pio-${{ runner.os }}-
+
+      - name: Install PlatformIO
+        run: pip install --upgrade platformio
+
+      - name: Build firmware (esp32s3box)
+        # A single GCC internal-compiler-error (RTL pass "hoist" segfault) can
+        # flakily hit one IRremoteESP8266 translation unit. The retry resumes the
+        # incremental build from the failed object; a real error fails both passes.
+        run: pio run -e esp32s3box || pio run -e esp32s3box -j 2
+
+      - name: Host unit tests
+        # Runs after the build so the Arduino-ESP32 framework (HIDTypes.h) is present.
+        run: tools/run_host_tests.sh
